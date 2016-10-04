@@ -1,9 +1,25 @@
 var express = require('express');
+var hbs = require('hbs');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', 
+      { 
+        title: 'notely',
+        notes: 
+                [
+                  {
+                    id: 1,
+                    done: true,
+                    description: 'einkaufen gehen'
+                  },
+                  {
+                    id: 2,
+                    done: false,
+                    description: 'Vorlesungen besuchen'
+                  }
+                ]
+      });
 });
 
 module.exports = router;

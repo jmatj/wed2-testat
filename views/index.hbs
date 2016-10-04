@@ -1,2 +1,9 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+<form action='/create' method='get'>
+    <input type="submit" value="create new note">
+</form>
+
+{{#each notes}}
+    {{> note this }}
+{{/each}}

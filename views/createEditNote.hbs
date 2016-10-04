@@ -1,0 +1,17 @@
+<div id="{{id}}">
+    <label for="title">Titel</label>
+    <input id="title" type="text" value="{{title}}"/>
+
+    <label for="description">Beschreibung</label>
+    <textarea id="description" type="text">{{description}}</textarea>
+
+    <label for="importance">Wichtigkeit</label>
+
+    <label for="duedate">Erledigt bis</label>
+    <input id="duedate" type="datetime" value="{{dueDate}}"/>
+    {{#if editMode}}
+        <button id="save">save</button>
+    {{else}}
+        <button id="create">create</button>
+    {{/if}}
+</div>

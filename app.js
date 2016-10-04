@@ -4,13 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var hbs = require('hbs');
 
 var routes = require('./routes/index');
+var createEditNote = require('./routes/createEditNote');
 var users = require('./routes/users');
 
 var app = express();
 
 // view engine setup
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -29,6 +32,8 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/create', createEditNote);
+app.use('/edit/:id', createEditNote);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
