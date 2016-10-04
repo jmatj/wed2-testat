@@ -8,7 +8,6 @@ var hbs = require('hbs');
 
 var routes = require('./routes/index');
 var createEditNote = require('./routes/createEditNote');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -34,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/create', createEditNote);
 app.use('/edit/:id', createEditNote);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
