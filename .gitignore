@@ -1,5 +1,6 @@
 node_modules/
 public/stylesheets/*.css*
+data/*
 
 # User-specific stuff:
 .idea/workspace.xml
