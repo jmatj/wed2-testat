@@ -1,17 +1,19 @@
-<div id="{{id}}">
-    <label for="title">Titel</label>
-    <input id="title" type="text" value="{{title}}"/>
+<div id="{{_id}}">
+    <form action='/note/save{{#with _id}}/{{this}}{{/with}}' method='post'>
+        <label for="title">Titel</label>
+        <input name="title" type="text" value="{{title}}"/>
 
-    <label for="description">Beschreibung</label>
-    <textarea id="description" type="text">{{description}}</textarea>
+        <label for="description">Beschreibung</label>
+        <textarea name="description" type="text">{{description}}</textarea>
 
-    <label for="importance">Wichtigkeit</label>
+        <label for="importance">Wichtigkeit</label>
 
-    <label for="duedate">Erledigt bis</label>
-    <input id="duedate" type="datetime" value="{{dueDate}}"/>
-    {{#if editMode}}
-        <button id="save">save</button>
-    {{else}}
-        <button id="create">create</button>
-    {{/if}}
+        <label for="duedate">Erledigt bis</label>
+        <input name="duedate" type="datetime" value="{{dueDate}}"/>
+        {{#with _id}}
+            <input type="submit" value="save">
+        {{else}}
+            <input type="submit" value="create">
+        {{/with}}
+    </form>
 </div>

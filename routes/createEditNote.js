@@ -1,28 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var noteController = require('../controller/noteController.js');
 
-router.get('/new', function(req, res, next) {
-        res.render('createEditNote',
-            {
-                id: 0,
-                title: '',
-                description: '',
-                importance: 0,
-                dueDate: '',
-                editMode: false
-            });
-});
-
-router.get('/edit/:id', function(req, res, next) {
-    res.render('createEditNote',
-        {
-            id: 123,
-            title: 'Milch kaufen',
-            description: '5 Liter Milch kaufen',
-            importance: 3,
-            dueDate: '15.10.16',
-            editMode: true
-        });
-});
+router.get('/new', noteController.newNote);
+router.get('/edit/:id', noteController.getNote);
+router.post('/save', noteController.createNote);
+router.post('/save/:id', noteController.updateNote);
 
 module.exports = router;

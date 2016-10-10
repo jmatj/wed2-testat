@@ -1,6 +1,8 @@
-<div id="{{id}}">
-    <input type="checkbox" id="{{id}}-cb" value="{{done}}" {{#if done}}checked="checked" {{/if}}>
-    <label for="{{id}}-cb">Finshed</label>
-    <textarea id="{{id}}-description" type="text">{{description}}</textarea>
-    <button id="{{id}}-save">save</button>
+<div id="{{_id}}">
+    <input type="checkbox" id="{{_id}}-cb" value="{{done}}" {{#if done}}checked="checked" {{/if}}>
+    <label for="{{_id}}-cb">Finshed</label>
+    <textarea id="{{_id}}-description" type="text">{{description}}</textarea>
+    <form action='/note/edit/{{_id}}' method='get'>
+        <input type="submit" value="edit">
+    </form>
 </div>
