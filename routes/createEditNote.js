@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    if (req.baseUrl === '/create') {
+router.get('/new', function(req, res, next) {
         res.render('createEditNote',
             {
                 id: 0,
@@ -12,17 +11,18 @@ router.get('/', function(req, res, next) {
                 dueDate: '',
                 editMode: false
             });
-    } else if (req.baseUrl.indexOf("/edit") === 0) {
-        res.render('createEditNote',
-            {
-                id: 123,
-                title: 'Milch kaufen',
-                description: '5 Liter Milch kaufen',
-                importance: 3,
-                dueDate: '15.10.16',
-                editMode: true
-            });
-    }
+});
+
+router.get('/edit/:id', function(req, res, next) {
+    res.render('createEditNote',
+        {
+            id: 123,
+            title: 'Milch kaufen',
+            description: '5 Liter Milch kaufen',
+            importance: 3,
+            dueDate: '15.10.16',
+            editMode: true
+        });
 });
 
 module.exports = router;
