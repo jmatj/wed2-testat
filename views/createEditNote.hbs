@@ -10,6 +10,10 @@
 
         <label for="duedate">Erledigt bis</label>
         <input name="duedate" type="datetime" value="{{dueDate}}"/>
+
+        <input type="checkbox" name="done" {{#if done}}checked="checked" {{/if}}>
+        <label for="name">Finshed</label>
+
         {{#with _id}}
             <input type="submit" value="save">
         {{else}}
