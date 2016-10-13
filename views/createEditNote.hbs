@@ -1,5 +1,5 @@
 <div id="{{_id}}">
-    <form action='/note/save{{#with _id}}/{{this}}{{/with}}' method='post'>
+    <form action='/note/{{#with _id}}edit/{{this}}{{else}}new{{/with}}' method='post'>
         <label for="title">Titel</label>
         <input name="title" type="text" value="{{title}}"/>
 
