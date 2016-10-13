@@ -1,4 +1,5 @@
 <div id="{{_id}}" class="short-note">
+    <span>{{fromNow}}</span>
     <input type="checkbox" id="{{_id}}-cb" value="{{done}}" {{#if done}}checked="checked" {{/if}} disabled>
     <label for="{{_id}}-cb">Finshed</label>
     <textarea id="{{_id}}-description" type="text" disabled>{{description}}</textarea>

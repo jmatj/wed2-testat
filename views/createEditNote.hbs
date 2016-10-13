@@ -1,4 +1,4 @@
-<div id="{{_id}}">
+<div id="{{_id}}" class="edit-note">
     <form action='/note/{{#with _id}}edit/{{this}}{{else}}new{{/with}}' method='post'>
         <label for="title">Titel</label>
         <input name="title" type="text" value="{{title}}"/>
@@ -7,9 +7,10 @@
         <textarea name="description" type="text">{{description}}</textarea>
 
         <label for="importance">Wichtigkeit</label>
+        <input name="importance" type="number" min="1" max="5" value="{{importance}}"/>
 
         <label for="duedate">Erledigt bis</label>
-        <input name="duedate" type="datetime" value="{{dueDate}}"/>
+        <input name="duedate" type="date" value="{{dueDate}}"/>
 
         <input type="checkbox" name="done" {{#if done}}checked="checked" {{/if}}>
         <label for="name">Finshed</label>

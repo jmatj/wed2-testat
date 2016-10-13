@@ -1,7 +1,11 @@
+var moment = require('moment');
 var noteService = require("../services/noteService.js");
 
 module.exports.loadNotes = function(req, res) {
     noteService.all(function(err, notes) {
+        notes.forEach(function(note, index) {
+            note.fromNow = moment(note.duedate).fromNow();
+        });
         res.render('index',
             {
                 title: 'notely',
@@ -15,8 +19,8 @@ module.exports.newNote = function(req, res) {
         {
             title: '',
             description: '',
-            importance: 0,
-            dueDate: new Date()
+            importance: 1,
+            dueDate: moment().format('YYYY-MM-DD')
         });
 };
 
