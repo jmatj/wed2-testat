@@ -1,7 +1,21 @@
 <h1>{{title}}</h1>
-<form action='/note/new' method='get'>
+<form action='/note/new' method='get' id="btn-new-note">
     <input type="submit" value="create new note">
 </form>
+<form action='/' method='get' class="btn-sort">
+    <input type="hidden" name="sort" value="finish_date">
+    <input type="submit" value="By finish date">
+</form>
+<form action='/' method='get' class="btn-sort">
+    <input type="hidden" name="sort" value="create_date">
+    <input type="submit" value="By created date">
+</form>
+<form action='/' method='get' class="btn-sort">
+    <input type="hidden" name="sort" value="importance">
+    <input type="submit" value="By importance">
+</form>
+
+
 
 {{#each notes}}
     {{> note this }}
