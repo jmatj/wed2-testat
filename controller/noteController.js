@@ -28,7 +28,7 @@ module.exports.getNote = function(req, res) {
 
 module.exports.createNote = function(req, res) {
     noteService.add(req.body, function(err, note) {
-        res.render('createEditNote', note);
+        res.redirect('/');
     });
 };
 
