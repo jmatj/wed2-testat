@@ -3,9 +3,7 @@ var db = new Datastore({ filename: './data/note.db', autoload: true });
 var configService = require("../services/configService.js");
 
 function getNote(id, callback) {
-    db.findOne({ _id: id }, function (err, note) {
-        callback(err, note);
-    });
+    db.findOne({ _id: id }, callback);
 }
 
 function loadNotes(sortBy, callback) {
@@ -30,9 +28,7 @@ function loadSortedNotes(sortBy, callback) {
 }
 
 function addNote(note, callback) {
-    db.insert(note, function(err, newNote){
-        callback(err, newNote);
-    });
+    db.insert(note, callback);
 }
 
 function updateNote(id, note, callback) {

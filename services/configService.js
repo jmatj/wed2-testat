@@ -2,9 +2,7 @@ var Datastore = require('nedb');
 var db = new Datastore({ filename: './data/config.db', autoload: true });
 
 function getConfig(name, callback) {
-    db.findOne({ name: name }, function (err, config) {
-        callback(err, config);
-    });
+    db.findOne({ name: name }, callback);
 }
 
 function setConfig(name, value, callback) {
