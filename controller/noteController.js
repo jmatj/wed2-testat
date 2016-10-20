@@ -2,7 +2,7 @@ var moment = require('moment');
 var noteService = require("../services/noteService.js");
 
 module.exports.loadNotes = function(req, res) {
-    noteService.all(function(err, notes) {
+    noteService.all(req.query.sort, function(err, notes) {
         notes.forEach(function(note, index) {
             note.fromNow = moment(note.duedate).fromNow();
         });
@@ -31,6 +31,9 @@ module.exports.getNote = function(req, res) {
 };
 
 module.exports.createNote = function(req, res) {
+    var note = req.body;
+    note.createDate = Date.now();
+    note.finishDate = null;
     noteService.add(req.body, function(err, note) {
         res.redirect('/');
     });

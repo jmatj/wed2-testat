@@ -7,18 +7,11 @@ function getConfig(name, callback) {
     });
 }
 
-function addConfig(name, value, callback) {
+function setConfig(name, value, callback) {
     var config = {'name': name, 'value': value};
-    db.insert(config, function(err, newConfig){
-        callback(err, newConfig);
-    });
-}
-
-function updateConfig(name, value, callback) {
-    var config = {'name': name, 'value': value};
-    db.update({'name': name}, config, {}, function (err) {
+    db.update({'name': name}, config, {upsert: true}, function (err) {
         getConfig(name, callback);
     });
 }
 
-module.exports = {get : getConfig, add : addConfig, update: updateConfig};
+module.exports = {get : getConfig, set : setConfig};
