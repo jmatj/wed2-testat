@@ -33,7 +33,7 @@ function loadNotes(sortBy, callback) {
                 // set config and order
                 configService.set('sort', sortBy, function(err, newSortBy) {
                    configService.set('sort_order', 1, function(err, sort_order) {
-                      loadSortedNotes(newSortBy.value, sort_order.value, callback.val);
+                      loadSortedNotes(newSortBy.value, sort_order.value, callback);
                    });
                 });
             } else {
