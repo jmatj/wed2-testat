@@ -33,9 +33,8 @@ module.exports.getNote = function(req, res) {
 
 module.exports.createNote = function(req, res) {
     var note = req.body;
-    note.createDate = Date.now();
-    note.finishDate = null;
-    req.body.duedate = moment(req.body.duedate).format('YYYY-MM-DD H:m');
+    note.createdate = Date.now();
+    note.duedate = moment(req.body.duedate).format('YYYY-MM-DD H:m');
     noteService.add(req.body, function(err, note) {
         res.redirect('/');
     });
