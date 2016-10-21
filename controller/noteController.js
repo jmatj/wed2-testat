@@ -34,15 +34,16 @@ module.exports.getNote = function(req, res) {
 
 module.exports.createNote = function(req, res) {
     var note = req.body;
-    note.createdate = Date.now();
-    note.duedate = moment(req.body.duedate).format('YYYY-MM-DD H:m');
+    note.createDate = Date.now();
+    note.finishDate = null;
+    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes');
     noteService.add(req.body, function(err, note) {
         res.redirect('/');
     });
 };
 
 module.exports.updateNote = function(req, res) {
-    req.body.duedate = moment(req.body.duedate).format('YYYY-MM-DD H:m');
+    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes');
     noteService.update(req.params.id, req.body, function(err, note) {
         res.redirect('/');
     });
