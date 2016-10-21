@@ -8,23 +8,56 @@ function getNote(id, callback) {
 
 function loadNotes(sortBy, callback) {
     // TODO: Switch ascending / descending order
-    if (!!sortBy) {
-        configService.set('sort', sortBy, function(err, config) {
-            loadSortedNotes(config.value, callback);
-        });
-    } else {
-        configService.get('sort', function(err, config) {
-            if (!!config) {
-                loadSortedNotes(config.value, callback);
+    configService.get('sort', function(err, config) {
+        if (!!config) {
+            if (!!sortBy) {
+                // set new sortby
+                configService.set('sort', sortBy, function(err, newSortBy) {
+                    // swap ascending / descending
+                    swapSortOrder(function(err, sort_order) {
+                        loadSortedNotes(newSortBy.value,  sort_order.value, callback);
+                    });
+                });
+
             } else {
+                // get config
+                configService.get('sort', function(err, sortBy) {
+                    configService.get('sort_order', function (err, sort_order) {
+                        loadSortedNotes(sortBy.value, sort_order.value, callback);
+                    });
+                });
+
+            }
+        } else {
+            if (!!sortBy) {
+                // set config and order
+                configService.set('sort', sortBy, function(err, newSortBy) {
+                   configService.set('sort_order', 1, function(err, sort_order) {
+                      loadSortedNotes(newSortBy.value, sort_order.value, callback.val);
+                   });
+                });
+            } else {
+                // load default
                 db.find({}, callback);
             }
-        });
-    }
+        }
+    });
 }
 
-function loadSortedNotes(sortBy, callback) {
-    db.find({}).sort({ [sortBy]: -1 }).exec(callback);
+function swapSortOrder(callback) {
+    configService.get('sort_order', function(err, config) {
+        var newOrder;
+        if (!config) {
+            newOrder = 1;
+        } else {
+            newOrder = config.value == 1 ? -1 : 1;
+        }
+        configService.set('sort_order', newOrder, callback);
+    });
+}
+
+function loadSortedNotes(sortBy, order, callback) {
+    db.find({}).sort({ [sortBy]: order }).exec(callback);
 }
 
 function addNote(note, callback) {
