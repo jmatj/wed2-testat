@@ -4,15 +4,15 @@
 </form>
 <form action='/' method='get' class="btn-sort">
     <input type="hidden" name="sort" value="duedate">
-    <input type="submit" value="By finish date">
+    <input type="submit" value="By finish date" {{#if_eq sortBy 'duedate'}} class="btn-focus"{{/if_eq}}>
 </form>
 <form action='/' method='get' class="btn-sort">
     <input type="hidden" name="sort" value="createdate">
-    <input type="submit" value="By created date">
+    <input type="submit" value="By created date" {{#if_eq sortBy 'createdate'}} class="btn-focus"{{/if_eq}}>
 </form>
 <form action='/' method='get' class="btn-sort">
     <input type="hidden" name="sort" value="importance">
-    <input type="submit" value="By importance">
+    <input type="submit" value="By importance" {{#if_eq sortBy 'importance'}} class="btn-focus"{{/if_eq}}>
 </form>
 
 

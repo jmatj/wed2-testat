@@ -19,6 +19,12 @@ hbs.registerHelper('times', function(n, block) {
     accum += block.fn(i);
   return accum;
 });
+hbs.registerHelper('if_eq', function(a, b, opts) {
+  if (a === b) {
+    return opts.fn(this);
+  }
+  return opts.inverse(this);
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 

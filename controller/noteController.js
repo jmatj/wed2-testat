@@ -2,14 +2,15 @@ var moment = require('moment');
 var noteService = require("../services/noteService.js");
 
 module.exports.loadNotes = function(req, res) {
-    noteService.all(req.query.sort, function(err, notes) {
+    noteService.all(req.query.sort, function(err, notes, sortBy) {
         notes.forEach(function(note, index) {
             note.fromNow = moment(note.duedate).fromNow();
         });
         res.render('index',
             {
                 title: 'notely',
-                notes: notes
+                notes: notes,
+                sortBy: sortBy
             });
     });
 };

@@ -38,7 +38,9 @@ function loadNotes(sortBy, callback) {
                 });
             } else {
                 // load default
-                db.find({}, callback);
+                db.find({}, function(err, notes) {
+                    callback(err, notes, null);
+                });
             }
         }
     });
@@ -57,7 +59,9 @@ function swapSortOrder(callback) {
 }
 
 function loadSortedNotes(sortBy, order, callback) {
-    db.find({}).sort({ [sortBy]: order }).exec(callback);
+    db.find({}).sort({ [sortBy]: order }).exec(function(err, notes) {
+        callback(err, notes, sortBy);
+    });
 }
 
 function addNote(note, callback) {
