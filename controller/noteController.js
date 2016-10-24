@@ -36,14 +36,14 @@ module.exports.createNote = function(req, res) {
     var note = req.body;
     note.createDate = Date.now();
     note.finishDate = null;
-    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes');
+    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes').format('YYYY-MM-DD HH:mm');
     noteService.add(req.body, function(err, note) {
         res.redirect('/');
     });
 };
 
 module.exports.updateNote = function(req, res) {
-    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes');
+    req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes').format('YYYY-MM-DD HH:mm');
     noteService.update(req.params.id, req.body, function(err, note) {
         res.redirect('/');
     });
