@@ -1,8 +1,8 @@
 var moment = require('moment');
 var noteService = require("../services/noteService.js");
 
-module.exports.loadNotes = function(req, res) {
-    noteService.all(req.query.sort, function(err, notes, sortBy) {
+module.exports.loadNotes = function(req, res, config) {
+    noteService.all(config['sort'].value, config['sort'].params.sortOrder, function(err, notes, sortBy) {
         notes.forEach(function(note, index) {
             note.fromNow = moment(note.duedate).fromNow();
         });
