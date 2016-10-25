@@ -29,6 +29,12 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
     });
 };
 
+module.exports.getStyleConfig = function(callback) {
+    configService.get(['style'], function(err, config) {
+        callback(config['style']);
+    });
+};
+
 function loadConfigurations(req, res, callback) {
     configService.get(['sort', 'style'], function(err, config) {
         callback(req, res, config);

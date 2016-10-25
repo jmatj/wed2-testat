@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var configController = require('./controller/configController.js');
 
 var index = require('./routes/index');
 var createEditNote = require('./routes/createEditNote');
@@ -13,6 +14,11 @@ var app = express();
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerAsyncHelper('getStyle', function(params, callback) {
+  configController.getStyleConfig(function(config){
+    callback(config.value);
+  });
+});
 hbs.registerHelper('times', function(n, block) {
   var accum = '';
   for(var i = 0; i < n; ++i)
