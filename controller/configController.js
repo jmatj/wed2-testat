@@ -12,7 +12,7 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
             sortOrder = config['sort'].params.sortOrder == 1 ? -1 : 1;
             hasSwappingChanges = true;
         }
-        if (!!config['style'] && !!query.style && config['style'].value === query.style) {
+        if (!!config['style'] && !!query.style) {
             style = config['style'].value == 'light' ? 'dark' : 'light';
             hasSwappingChanges = true;
         }

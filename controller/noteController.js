@@ -10,7 +10,8 @@ module.exports.loadNotes = function(req, res, config) {
             {
                 title: 'notely',
                 notes: notes,
-                sortBy: sortBy
+                sortBy: sortBy,
+                style: config['style'].value
             });
     });
 };

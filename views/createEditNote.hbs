@@ -1,4 +1,4 @@
-<div id="{{_id}}" class="edit-note">
+<div id="{{_id}}" class="notely edit-note">
     <form action='/note/{{#with _id}}edit/{{this}}{{else}}new{{/with}}' method='post'>
         <label for="title">Titel</label>
         <input name="title" type="text" value="{{title}}"/>
