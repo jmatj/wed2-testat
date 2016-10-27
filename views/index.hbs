@@ -1,27 +1,35 @@
-<div class="notely {{style}}">
-    <h1>{{title}}</h1>
+<header><h1>{{title}}</h1></header>
+<nav>
     <form action='/note/new' method='get' id="btn-new-note">
         <input type="submit" value="create new note">
     </form>
-    <form action='/' method='get' class="btn-sort">
-        <input type="hidden" name="sort" value="duedate">
-        <input type="submit" value="By finish date" {{#if_eq sortBy 'duedate'}} class="btn-focus"{{/if_eq}}>
-    </form>
-    <form action='/' method='get' class="btn-sort">
-        <input type="hidden" name="sort" value="createdate">
-        <input type="submit" value="By created date" {{#if_eq sortBy 'createdate'}} class="btn-focus"{{/if_eq}}>
-    </form>
-    <form action='/' method='get' class="btn-sort">
-        <input type="hidden" name="sort" value="importance">
-        <input type="submit" value="By importance" {{#if_eq sortBy 'importance'}} class="btn-focus"{{/if_eq}}>
-    </form>
-    <form action='/' method='get' class="btn-sort">
+    <form action='/' method='get' id="btn-style-switch">
         <input type="hidden" name="style" value="{{#if_eq style 'light'}}dark{{else}}light{{/if_eq}}">
         <input type="submit" value="switch style">
     </form>
-
-
+</nav>
+<aside>
+    <div class="btn-sort">
+        <form action='/' method='get'>
+            <input type="hidden" name="sort" value="duedate">
+            <input type="submit" value="By finish date" {{#if_eq sortBy 'duedate'}} class="btn-focus"{{/if_eq}}>
+        </form>
+        <form action='/' method='get'>
+            <input type="hidden" name="sort" value="createdate">
+            <input type="submit" value="By created date" {{#if_eq sortBy 'createdate'}} class="btn-focus"{{/if_eq}}>
+        </form>
+        <form action='/' method='get'>
+            <input type="hidden" name="sort" value="importance">
+            <input type="submit" value="By importance" {{#if_eq sortBy 'importance'}} class="btn-focus"{{/if_eq}}>
+        </form>
+    </div>
+    <form action='/' method='get' id="btn-hide-finished">
+        <input type="hidden" name="hide" value="hide">
+        <input type="submit" value="Fertige verbergen">
+    </form>
+</aside>
+<main>
     {{#each notes}}
         {{> note this }}
-{{/each}}
-</div>
+    {{/each}}
+</main>

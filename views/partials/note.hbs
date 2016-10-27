@@ -1,11 +1,14 @@
-<div id="{{_id}}" class="short-note">
-    <span>{{fromNow}}</span>
-    <input type="checkbox" id="{{_id}}-cb" value="{{done}}" {{#if done}}checked="checked" {{/if}} disabled>
-    <label for="{{_id}}-cb">Finshed</label>
-    {{> importance importance }}
-    <h2 id="{{_id}}-title">{{title}}</h2>
-    <textarea id="{{_id}}-description" type="text" disabled>{{description}}</textarea>
+<article id="{{_id}}" class="short-note">
+    <header>
+        <span class="timeLeft">{{fromNow}}</span>
+        <h2>{{title}}</h2>
+        <div class="importance">{{> importance importance }}</div>
+    </header>
+
+    <input id="{{_id}}-cb" type="checkbox" value="{{done}}" {{#if done}}checked="checked" {{/if}} disabled>
+    <label for="{{_id}}-cb">Finished</label>
+    <textarea disabled>{{description}}</textarea>
     <form action='/note/edit/{{_id}}' method='get'>
-        <input type="submit" value="edit">
+        <input class="btn-edit" type="submit" value="edit">
     </form>
-</div>
+</article>
