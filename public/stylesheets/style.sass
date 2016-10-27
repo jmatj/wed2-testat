@@ -5,17 +5,39 @@ body
 body.dark
   background: lightgrey
 
-a
-  color: #00B7FF
+nav
+  display: flex
+  justify-content: space-between
 
-.short-note
-  width: 53%
+aside
+  margin-top: 10px
+  display: flex
+  justify-content: space-between
+  flex-direction: column
+
+  div.btn-sort
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    > form
+      display: inline-block
+      input
+        width: 100%
+
+  #btn-hide-finished > input
+    width: 100%
+
+@media screen and (min-width: 700px)
+  aside
+    flex-direction: row
+    div.btn-sort
+      flex-direction: row
+
+article
   padding-bottom: 10px
   *
     vertical-align: middle
   textarea
-    width: 67%
-    height: 80px
     border-radius: 18px
     padding-left: 18px
     padding-right: 18px
@@ -25,9 +47,9 @@ a
     background-color: #fff
   form
     display: inline
-    input
-      width: 12%
-      height: 45px
+    //input
+    //  width: 12%
+    //  height: 45px
 
 
 .btn-focus
