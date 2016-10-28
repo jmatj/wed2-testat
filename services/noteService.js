@@ -5,8 +5,12 @@ function getNote(id, callback) {
     db.findOne({ _id: id }, callback);
 }
 
-function loadNotes(sort, sortOrder, callback) {
-    db.find({}).sort({ [sort]: sortOrder }).exec(function(err, notes) {
+function loadNotes(sort, sortOrder, hide, callback) {
+    var findQuery = {};
+    if (hide === 'true') {
+        findQuery = {$not: { done: 'on' }}
+    }
+    db.find(findQuery).sort({ [sort]: sortOrder }).exec(function(err, notes) {
         callback(err, notes, sort);
     });
 }

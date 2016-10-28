@@ -5,6 +5,7 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
         var sort = !!query.sort ? query.sort : 'duedate';
         var sortOrder = 1;
         var style = !!query.style ? query.style : 'light';
+        var hide = !!query.hide ? query.hide : 'false';
         var hasSwappingChanges = false;
 
         //swap sort properties if query param is set and corresponds with the config value
@@ -16,11 +17,17 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
             style = config['style'].value == 'light' ? 'dark' : 'light';
             hasSwappingChanges = true;
         }
+        if (!!config['hide'] && !!query.hide) {
+            hide = config['hide'].value == 'true' ? 'false' : 'true';
+            hasSwappingChanges = true;
+        }
         //update config only on updates
         if (hasConfigurationsChanges(hasSwappingChanges, config, query)) {
             configService.set('sort', sort, {sortOrder: sortOrder}, function() {
                 configService.set('style', style, {}, function() {
-                    loadConfigurations(req, res, callback);
+                    configService.set('hide', hide, {}, function() {
+                        loadConfigurations(req, res, callback);
+                    });
                 });
             });
         } else {
@@ -36,11 +43,15 @@ module.exports.getStyleConfig = function(callback) {
 };
 
 function loadConfigurations(req, res, callback) {
-    configService.get(['sort', 'style'], function(err, config) {
+    configService.get(['sort', 'style', 'hide'], function(err, config) {
         callback(req, res, config);
     });
 }
 
 function hasConfigurationsChanges(hasSwappingChanges, config, query) {
-    return hasSwappingChanges || (!!query.sort && query.sort !== config['sort']) || config['sort'] === undefined || config['style'] === undefined;
+    return hasSwappingChanges
+        || (!!query.sort && query.sort !== config['sort'])
+        || config['sort'] === undefined
+        || config['style'] === undefined
+        || config['hide'] === undefined;
 }

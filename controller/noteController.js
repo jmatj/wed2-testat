@@ -2,7 +2,7 @@ var moment = require('moment');
 var noteService = require("../services/noteService.js");
 
 module.exports.loadNotes = function(req, res, config) {
-    noteService.all(config['sort'].value, config['sort'].params.sortOrder, function(err, notes, sortBy) {
+    noteService.all(config['sort'].value, config['sort'].params.sortOrder, config['hide'].value, function(err, notes, sortBy) {
         notes.forEach(function(note, index) {
             note.fromNow = moment(note.duedate).fromNow();
         });
@@ -10,7 +10,8 @@ module.exports.loadNotes = function(req, res, config) {
             {
                 title: 'notely',
                 notes: notes,
-                sortBy: sortBy
+                sortBy: sortBy,
+                hide: config['hide'].value
             });
     });
 };
