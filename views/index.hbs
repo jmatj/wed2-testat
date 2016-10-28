@@ -32,4 +32,9 @@
     {{#each notes}}
         {{> note this }}
     {{/each}}
+    {{#if_eq notes.length 0}}
+        <div class="empty-list">
+            <span>Keine Todo gefunden</span>
+        </div>
+    {{/if_eq}}
 </main>
