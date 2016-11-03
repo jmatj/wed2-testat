@@ -25,7 +25,7 @@
     </div>
     <form action='/' method='get' id="btn-hide-finished">
         <input type="hidden" name="hide" value="{{#if_eq hide 'true'}}false{{else}}true{{/if_eq}}">
-        <input type="submit" value="Fertige verbergen" {{#if_eq hide 'true'}} class="btn-focus"{{/if_eq}}>
+        <input type="submit" value={{#if_eq hide 'true'}}"Alle anzeigen"{{else}}"Fertige verbergen"{{/if_eq}}>
     </form>
 </aside>
 <main>
