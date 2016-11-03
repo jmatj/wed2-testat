@@ -12,13 +12,16 @@
         <label for="duedate">Erledigt bis</label>
         <input name="duedate" type="date" value="{{duedate}}"/>
 
-        <input type="checkbox" name="done" {{#if done}}checked="checked" {{/if}}>
-        <label for="name">Finshed</label>
+        <label id="finished">
+            <input type="checkbox" name="done" {{#if done}}checked="checked" {{/if}}>
+            Erledigt!
+        </label>
 
         {{#with _id}}
-            <input type="submit" value="save">
+            <input type="submit" value="Save" name="save">
         {{else}}
-            <input type="submit" value="create">
+            <input type="submit" value="Create" name="create">
         {{/with}}
+        <input type="submit" value="Cancel" name="cancel">
     </form>
 </div>

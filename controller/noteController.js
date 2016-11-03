@@ -34,6 +34,10 @@ module.exports.getNote = function(req, res) {
 };
 
 module.exports.createNote = function(req, res) {
+    if (!!req.body.cancel) {
+        res.redirect('/');
+        return;
+    }
     var note = req.body;
     note.createDate = Date.now();
     note.finishDate = null;
@@ -44,6 +48,10 @@ module.exports.createNote = function(req, res) {
 };
 
 module.exports.updateNote = function(req, res) {
+    if (!!req.body.cancel) {
+        res.redirect('/');
+        return;
+    }
     req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes').format('YYYY-MM-DD HH:mm');
     noteService.update(req.params.id, req.body, function(err, note) {
         res.redirect('/');
