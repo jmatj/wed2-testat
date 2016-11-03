@@ -27,29 +27,70 @@ aside
   #btn-hide-finished > input
     width: 100%
 
-@media screen and (min-width: 700px)
+main
+  article
+    display: flex
+    flex-direction: column
+    border: 1px dashed darkgray
+    padding: 10px
+    margin-top: 20px
+  header
+    display: flex
+    flex-flow: row wrap
+    .timeLeft
+      flex: 2 auto
+    .importance
+      margin-left: auto
+    .title
+      flex: 1 100%
+  label
+    font-weight: bold
+  textarea
+    //border-radius: 18px
+    padding-left: 18px
+    padding-right: 18px
+    padding-top: 10px
+    margin-right: 10px
+    margin-top: 5px
+    box-sizing: border-box
+    background-color: #fff
+  form > input
+    width: 20%
+
+
+@media screen and (min-width: 480px)
+  article > header
+    .title
+      order: 2
+      flex: 1 auto
+      margin-left: 10px
+    .importance
+      order: 3
+    .timeLeft
+      flex-grow: 0
+
+@media screen and (min-width: 768px)
+  main > article
+    flex-flow: row wrap
+    border: none
+    header
+      flex: 1 100%
+      .timeLeft
+        flex: 0 150px
+      .importance
+        margin-right: 150px
+    label, form
+      flex: 0 150px
+    textarea
+      flex: 1 auto
+    form > input
+      width: 100%
+      height: 100%
   aside
     flex-direction: row
     div.btn-sort
       flex-direction: row
 
-article
-  padding-bottom: 10px
-  *
-    vertical-align: middle
-  textarea
-    border-radius: 18px
-    padding-left: 18px
-    padding-right: 18px
-    padding-top: 10px
-    margin-right: 10px
-    box-sizing: border-box
-    background-color: #fff
-  form
-    display: inline
-    //input
-    //  width: 12%
-    //  height: 45px
 
 .empty-list
     background: #D7EBF3
