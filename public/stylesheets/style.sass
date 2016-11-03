@@ -8,11 +8,19 @@ body
   box-sizing: border-box
 
 body.dark
-  background: lightgrey
+  background: black
+  color: white
+  textarea.ro-description
+    background: darkblue
+    color: white
 
 nav
   display: flex
   justify-content: space-between
+
+textarea
+  padding: 10px
+  background-color: #fff
 
 aside
   margin-top: 10px
@@ -51,12 +59,9 @@ main
       flex: 1 1 auto
   label
     font-weight: bold
-  textarea
-    padding: 10px
-    margin-right: 10px
-    background-color: #fff
   form > input
     width: 20%
+    margin-left: 10px
 
 div.edit-note > form
   display: flex
@@ -90,7 +95,7 @@ div.edit-note > form
       flex: 1 100%
       flex-wrap: nowrap
       .timeLeft
-        flex: 0 150px
+        flex: 0 0 150px
       .importance
         margin-right: 150px
     label, form
@@ -114,9 +119,11 @@ div.edit-note > form
       flex: 0 20%
     label#finished
       flex: 0 100%
+      margin-left: 20%
     input[type="submit"]
       margin-right: 15px
-
+    input[value="Save"], input[value="Create"]
+      margin-left: 20%
 
 .empty-list
     background: #D7EBF3
