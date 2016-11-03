@@ -1,16 +1,16 @@
 <div id="{{_id}}" class="edit-note">
     <form action='/note/{{#with _id}}edit/{{this}}{{else}}new{{/with}}' method='post'>
         <label for="title">Titel</label>
-        <input name="title" type="text" value="{{title}}"/>
+        <input name="title" type="text" value="{{title}}" required/>
 
         <label for="description">Beschreibung</label>
-        <textarea name="description" type="text">{{description}}</textarea>
+        <textarea name="description" type="text" required>{{description}}</textarea>
 
         <label for="importance">Wichtigkeit</label>
-        <input name="importance" type="number" min="1" max="5" value="{{importance}}"/>
+        <input name="importance" type="number" min="1" max="5" value="{{importance}}" required/>
 
         <label for="duedate">Erledigt bis</label>
-        <input name="duedate" type="date" value="{{duedate}}"/>
+        <input name="duedate" type="date" value="{{duedate}}" required/>
 
         <label id="finished">
             <input type="checkbox" name="done" {{#if done}}checked="checked" {{/if}}>
@@ -22,6 +22,6 @@
         {{else}}
             <input type="submit" value="Create" name="create">
         {{/with}}
-        <input type="submit" value="Cancel" name="cancel">
+        <input type="submit" value="Cancel" name="cancel" formnovalidate>
     </form>
 </div>

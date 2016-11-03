@@ -6,10 +6,10 @@
     </header>
 
     <label>
-        <input id="{{_id}}-cb" type="checkbox" value="{{done}}" {{#if done}}checked="checked" {{/if}} disabled>
+        <input id="{{_id}}-cb" type="checkbox" value="{{done}}" {{#if done}}checked="checked" {{/if}} readonly>
         Finished
     </label>
-    <textarea disabled>{{description}}</textarea>
+    <textarea readonly>{{description}}</textarea>
     <form action='/note/edit/{{_id}}' method='get'>
         <input class="btn-edit" type="submit" value="Edit">
     </form>
