@@ -1,6 +1,11 @@
 body
   padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  max-width: 1024px
+  box-sizing: inherit
+  margin: 0 auto
+*
+  box-sizing: border-box
 
 body.dark
   background: lightgrey
@@ -52,10 +57,20 @@ main
     padding-top: 10px
     margin-right: 10px
     margin-top: 5px
-    box-sizing: border-box
     background-color: #fff
   form > input
     width: 20%
+
+div.edit-note > form
+  display: flex
+  flex-direction: column
+  label:not(#finished)
+    display: inline-block
+    font-weight: bold
+  input:not([type="checkbox"]):not([type="submit"]), textarea
+    width: 100%
+  input, textarea
+    margin-bottom: 20px
 
 
 @media screen and (min-width: 480px)
@@ -91,6 +106,18 @@ main
     div.btn-sort
       flex-direction: row
 
+  div.edit-note > form
+    flex-flow: row wrap
+    input:not([type="checkbox"]):not([type="submit"]), textarea
+      flex: 1 1 80%
+      width: auto
+    label
+      flex: 0 20%
+    label#finished
+      flex: 0 100%
+    input[type="submit"]
+      margin-right: 15px
+
 
 .empty-list
     background: #D7EBF3
@@ -102,14 +129,3 @@ main
   box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.4)
   background: #fff
   padding: 5px
-
-.edit-note
-  *
-    vertical-align: middle
-  label
-    width: 9%
-    display: inline-block
-  input:not([type="checkbox"]):not([type="submit"]), textarea
-    width: 90%
-  label, input, textarea
-    margin-bottom: 20px
