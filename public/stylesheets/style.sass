@@ -43,20 +43,17 @@ main
     display: flex
     flex-flow: row wrap
     .timeLeft
-      flex: 2 auto
+      flex: 2 0 auto
     .importance
+      flex-shrink: 0
       margin-left: auto
     .title
-      flex: 1 100%
+      flex: 1 1 auto
   label
     font-weight: bold
   textarea
-    //border-radius: 18px
-    padding-left: 18px
-    padding-right: 18px
-    padding-top: 10px
+    padding: 10px
     margin-right: 10px
-    margin-top: 5px
     background-color: #fff
   form > input
     width: 20%
@@ -75,9 +72,10 @@ div.edit-note > form
 
 @media screen and (min-width: 480px)
   article > header
+    flex-wrap: nowrap
     .title
       order: 2
-      flex: 1 auto
+      flex: 1 2 auto
       margin-left: 10px
     .importance
       order: 3
@@ -90,6 +88,7 @@ div.edit-note > form
     border: none
     header
       flex: 1 100%
+      flex-wrap: nowrap
       .timeLeft
         flex: 0 150px
       .importance
