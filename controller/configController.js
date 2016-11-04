@@ -2,27 +2,28 @@ var configService = require("../services/configService.js");
 
 module.exports.updateConfigurations = function(req, res, query, callback) {
     loadConfigurations(req, res, function (req, res, config) {
+        var hasChanges = false;
         var sort = !!query.sort ? query.sort : 'duedate';
         var sortOrder = 1;
-        var style = !!query.style ? query.style : 'light';
-        var hide = !!query.hide ? query.hide : 'false';
-        var hasSwappingChanges = false;
+        var style = !!query.style ? query.style : !!config['style'] ? config['style'].value : 'light';
+        var hide = !!query.hide ? query.hide : !!config['hide'] ? config['hide'].value : 'false';
 
         //swap sort properties if query param is set and corresponds with the config value
         if (!!config['sort'] && !!query.sort && config['sort'].value === query.sort) {
             sortOrder = config['sort'].params.sortOrder == 1 ? -1 : 1;
-            hasSwappingChanges = true;
+            hasChanges = true;
         }
-        if (!!config['style'] && !!query.style) {
-            style = config['style'].value == 'light' ? 'dark' : 'light';
-            hasSwappingChanges = true;
+
+        //only update if query param does not correspond with config value
+        if (!!config['style'] && config['style'].value !== style) {
+            hasChanges = true;
         }
-        if (!!config['hide'] && !!query.hide) {
-            hide = config['hide'].value == 'true' ? 'false' : 'true';
-            hasSwappingChanges = true;
+        if (!!config['hide'] && config['hide'].value !== hide) {
+            hasChanges = true;
         }
+
         //update config only on updates
-        if (hasConfigurationsChanges(hasSwappingChanges, config, query)) {
+        if (hasConfigurationsChanges(hasChanges, config, query)) {
             configService.set('sort', sort, {sortOrder: sortOrder}, function() {
                 configService.set('style', style, {}, function() {
                     configService.set('hide', hide, {}, function() {
@@ -48,10 +49,10 @@ function loadConfigurations(req, res, callback) {
     });
 }
 
-function hasConfigurationsChanges(hasSwappingChanges, config, query) {
-    return hasSwappingChanges
-        || (!!query.sort && query.sort !== config['sort'])
-        || config['sort'] === undefined
+function hasConfigurationsChanges(hasChanges, config, query) {
+    return hasChanges
+        || (!!query.sort && query.sort !== config['sort'].value)
+        || config['sort'] === undefined  //initial values should be set
         || config['style'] === undefined
         || config['hide'] === undefined;
 }

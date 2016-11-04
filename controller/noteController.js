@@ -11,7 +11,8 @@ module.exports.loadNotes = function(req, res, config) {
                 title: 'notely',
                 notes: notes,
                 sortBy: sortBy,
-                hide: config['hide'].value
+                hide: config['hide'].value,
+                style: config['style'].value
             });
     });
 };
@@ -39,8 +40,7 @@ module.exports.createNote = function(req, res) {
         return;
     }
     var note = req.body;
-    note.createDate = Date.now();
-    note.finishDate = null;
+    note.createdate = Date.now();
     req.body.duedate = moment(req.body.duedate).add(23, 'hours').add(59, 'minutes').format('YYYY-MM-DD HH:mm');
     noteService.add(req.body, function(err, note) {
         res.redirect('/');
