@@ -1,3 +1,11 @@
+$shadowColor: #cfcfcf
+$buttonColor: white
+$buttonColorHighlight: #f0f0f0
+$nightColor: white
+$nightButtonColor: darkblue
+$nightButtonColorHighlight: lightblue
+$defaultColWidth: 150px
+
 body
   padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
@@ -9,20 +17,18 @@ body
 
 body.dark
   background: black
-  color: white
-  span.importance
-    color: white
+  color: $nightColor
   textarea.ro-description
-    background: darkblue
-    color: white
+    background: $nightButtonColor
+    color: $nightColor
   input[type="submit"]
-    background: darkblue
-    color: white
+    background: $nightButtonColor
+    color: $nightColor
   input[type="submit"]:hover
-    background: lightblue
+    background: $nightButtonColorHighlight
   input[type="submit"].btn-focus, input[type="submit"]:active
-    box-shadow: inset -2px 4px 10px 0px #cfcfcf
-    background: lightblue
+    box-shadow: inset -2px 4px 10px 0px $shadowColor
+    background: $nightButtonColorHighlight
 
 nav
   display: flex
@@ -114,11 +120,11 @@ div.edit-note > form
       flex: 1 100%
       flex-wrap: nowrap
       .timeLeft
-        flex: 0 0 150px
+        flex: 0 0 $defaultColWidth
       .importance
-        margin-right: 150px
+        margin-right: $defaultColWidth
     label, form
-      flex: 0 150px
+      flex: 0 $defaultColWidth
     textarea
       flex: 1 auto
     form > input
@@ -156,11 +162,11 @@ input[type="submit"]
   text-align: center
   text-decoration: none
   padding: 5px 20px
-  background: white
+  background: $buttonColor
 
 input[type="submit"]:hover
-  background: #f0f0f0
+  background: $buttonColorHighlight
 
 input[type="submit"].btn-focus, input[type="submit"]:active
-  box-shadow: inset -2px 4px 10px 0px #cfcfcf
-  background: #f0f0f0
+  box-shadow: inset -2px 4px 10px 0px $shadowColor
+  background: $buttonColorHighlight
