@@ -30,6 +30,12 @@ body.dark
     box-shadow: inset -2px 4px 10px 0px $shadowColor
     background: $nightButtonColorHighlight
 
+h1 > a
+  text-decoration: none
+  &:visited
+    text-decoration: none
+    color: inherit
+
 nav
   display: flex
   justify-content: space-between
@@ -91,6 +97,7 @@ main
 div.edit-note > form
   display: flex
   flex-direction: column
+  margin-top: 50px
   label:not(#finished)
     display: inline-block
     font-weight: bold

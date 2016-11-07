@@ -8,7 +8,6 @@ module.exports.loadNotes = function(req, res, config) {
         });
         res.render('index',
             {
-                title: 'notely',
                 notes: notes,
                 sortBy: sortBy,
                 hide: config['hide'].value,
