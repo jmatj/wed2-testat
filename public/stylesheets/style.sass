@@ -63,7 +63,11 @@ main
     .importance
       flex-shrink: 0
       margin-left: auto
-    .title
+    h2
+      display: inline
+      font-size: inherit
+      font-weight: normal
+      margin: 0
       flex: 1 1 100%
   label
     font-weight: bold
@@ -87,7 +91,7 @@ div.edit-note > form
 @media screen and (min-width: 480px)
   article > header
     flex-wrap: nowrap
-    .title
+    h2
       order: 2
       flex: 1 2 auto
       margin-left: 10px
