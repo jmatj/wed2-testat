@@ -3,7 +3,7 @@ var configService = require("../services/configService.js");
 module.exports.updateConfigurations = function(req, res, query, callback) {
     loadConfigurations(req, res, function (req, res, config) {
         var hasChanges = false;
-        var sort = !!query.sort ? query.sort : 'duedate';
+        var sort = !!query.sort ? query.sort : !!config['sort'] ? config['sort'].value : 'duedate';
         var sortOrder = 1;
         var style = !!query.style ? query.style : !!config['style'] ? config['style'].value : 'light';
         var hide = !!query.hide ? query.hide : !!config['hide'] ? config['hide'].value : 'false';
