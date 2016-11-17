@@ -42,14 +42,19 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
     });
 };
 
-module.exports.getStyleConfig = function(callback) {
-    configService.get(['style'], function(err, config) {
-        callback(config['style']);
-    });
+module.exports.getStyleConfig = function(req, callback) {
+    if (!!req.query.style) {
+        callback(req.query.style);
+    } else {
+        configService.get(req.sessionID, 'style', function (err, config) {
+            var style = !!config ? config.value : 'light';
+            callback(style);
+        });
+    }
 };
 
 function loadConfigurations(req, res, uid, callback) {
-    configService.get(uid, function(err, config) {
+    configService.getAll(uid, function(err, config) {
         callback(req, res, config);
     });
 }

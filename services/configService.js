@@ -1,7 +1,7 @@
 var Datastore = require('nedb');
 var db = new Datastore({ filename: './data/config.db', autoload: true });
 
-function getConfig(uid, callback) {
+function getAllConfig(uid, callback) {
     db.find({ 'uid': uid }, function(err, results) {
         var config = {};
         results.forEach((r) => {
@@ -11,6 +11,10 @@ function getConfig(uid, callback) {
     });
 }
 
+function getConfig(uid, name, callback) {
+    db.findOne({'uid': uid, 'name': name}, callback);
+}
+
 function setConfig(uid, name, value, params, callback) {
     var config = {'uid': uid, 'name': name, 'value': value, 'params': params};
     db.update({'uid': uid, 'name': name}, config, {upsert: true}, function (err) {
@@ -18,4 +22,4 @@ function setConfig(uid, name, value, params, callback) {
     });
 }
 
-module.exports = {get : getConfig, set : setConfig};
+module.exports = {get : getConfig, getAll : getAllConfig, set : setConfig};

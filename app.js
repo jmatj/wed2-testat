@@ -16,11 +16,6 @@ var app = express();
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
-hbs.registerAsyncHelper('getStyle', function(params, callback) {
-  configController.getStyleConfig(function(config){
-    callback(config.value);
-  });
-});
 hbs.registerHelper('times', function(n, block) {
   var accum = '';
   for(var i = 0; i < n; ++i)
@@ -51,6 +46,13 @@ app.use(session({ secret: '1LQkBqg3kE9Aw9Svvivwb6nXTmmOs',
   },
   store: new nedbStore({ filename: 'data/session.db' })
 }));
+
+app.use(function(req, res, next) {
+  configController.getStyleConfig(req, function(style) {
+    res.locals.themeStyle = style;
+  });
+  next();
+});
 
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
