@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var nedbStore = require('express-nedb-session')(session);
 var hbs = require('hbs');
 var configController = require('./controller/configController.js');
 
@@ -40,6 +42,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: '1LQkBqg3kE9Aw9Svvivwb6nXTmmOs',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { path: '/',
+    httpOnly: true,
+    maxAge: 24 * 3600  // One day
+  },
+  store: new nedbStore({ filename: 'data/session.db' })
+}));
+
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),

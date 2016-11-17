@@ -1,7 +1,9 @@
 var configService = require("../services/configService.js");
 
 module.exports.updateConfigurations = function(req, res, query, callback) {
-    loadConfigurations(req, res, function (req, res, config) {
+    var uid = req.sessionID;
+
+    loadConfigurations(req, res, uid, function (req, res, config) {
         var hasChanges = false;
         var sort = !!query.sort ? query.sort : !!config['sort'] ? config['sort'].value : 'duedate';
         var sortOrder = 1;
@@ -14,7 +16,10 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
             hasChanges = true;
         }
 
-        //only update if query param does not correspond with config value
+        if (!!config['sort'] && config['sort'].value !== sort) {
+            hasChanges = true;
+        }
+
         if (!!config['style'] && config['style'].value !== style) {
             hasChanges = true;
         }
@@ -24,10 +29,10 @@ module.exports.updateConfigurations = function(req, res, query, callback) {
 
         //update config only on updates
         if (hasConfigurationsChanges(hasChanges, config, query)) {
-            configService.set('sort', sort, {sortOrder: sortOrder}, function() {
-                configService.set('style', style, {}, function() {
-                    configService.set('hide', hide, {}, function() {
-                        loadConfigurations(req, res, callback);
+            configService.set(uid, 'sort', sort, {sortOrder: sortOrder}, function() {
+                configService.set(uid, 'style', style, {}, function() {
+                    configService.set(uid, 'hide', hide, {}, function() {
+                        loadConfigurations(req, res, uid, callback);
                     });
                 });
             });
@@ -43,15 +48,14 @@ module.exports.getStyleConfig = function(callback) {
     });
 };
 
-function loadConfigurations(req, res, callback) {
-    configService.get(['sort', 'style', 'hide'], function(err, config) {
+function loadConfigurations(req, res, uid, callback) {
+    configService.get(uid, function(err, config) {
         callback(req, res, config);
     });
 }
 
-function hasConfigurationsChanges(hasChanges, config, query) {
+function hasConfigurationsChanges(hasChanges, config) {
     return hasChanges
-        || (!!query.sort && query.sort !== config['sort'].value)
         || config['sort'] === undefined  //initial values should be set
         || config['style'] === undefined
         || config['hide'] === undefined;

@@ -1,27 +1,19 @@
 var Datastore = require('nedb');
 var db = new Datastore({ filename: './data/config.db', autoload: true });
 
-function prepareConfigArray(configurations) {
-    var configurationArray = [];
-    configurations.forEach(function(config, index) {
-        configurationArray.push({name: config});
-    });
-    return configurationArray;
-}
-
-function getConfig(configurations, callback) {
-    db.find({ $or: prepareConfigArray(configurations) }, function (err, configs) {
-        var lookup = {};
-        for (var i = 0, len = configs.length; i < len; i++) {
-            lookup[configs[i].name] = configs[i];
-        }
-        callback(err, lookup);
+function getConfig(uid, callback) {
+    db.find({ 'uid': uid }, function(err, results) {
+        var config = {};
+        results.forEach((r) => {
+            config[r.name] = {'name': r.name, 'value': r.value, 'params': r.params};
+        });
+        callback(err, config);
     });
 }
 
-function setConfig(name, value, params, callback) {
-    var config = {'name': name, 'value': value, 'params': params};
-    db.update({'name': name}, config, {upsert: true}, function (err) {
+function setConfig(uid, name, value, params, callback) {
+    var config = {'uid': uid, 'name': name, 'value': value, 'params': params};
+    db.update({'uid': uid, 'name': name}, config, {upsert: true}, function (err) {
         callback();
     });
 }
